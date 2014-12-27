@@ -11,3 +11,11 @@ execute 'download minecraft server' do
   command "wget #{minecraft_server_url} -O #{minecraft_path}"
   not_if  "test -f #{minecraft_path}"
 end
+
+execute 'make executable' do
+  command "chmod 0744 #{minecraft_path}"
+end
+
+execute 'change minecraft server owner' do
+  command "chown #{node[:minecraft][:user]}:#{node[:minecraft][:user]} #{minecraft_path}"
+end
