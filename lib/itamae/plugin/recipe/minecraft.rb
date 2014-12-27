@@ -1,11 +1,5 @@
-require "itamae/plugin/recipe/minecraft/version"
+minecraft_dir = '/opt/minecraft'
 
-module Itamae
-  module Plugin
-    module Recipe
-      module Minecraft
-        # Your code goes here...
-      end
-    end
-  end
+directory minecraft_dir do
+  action :create
 end
