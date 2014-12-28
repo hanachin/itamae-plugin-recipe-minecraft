@@ -50,3 +50,9 @@ execute 'create symlink to minecraft jar' do
   command "ln -sf #{filename} minecraft_server.jar"
   cwd minecraft_dir
 end
+
+file "#{minecraft_dir}/eula.txt" do
+  content 'eula=true'
+  owner minecraft_user
+  group minecraft_user
+end
