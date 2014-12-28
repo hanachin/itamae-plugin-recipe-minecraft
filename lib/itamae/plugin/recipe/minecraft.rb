@@ -13,10 +13,14 @@ minecraft_user = node[:minecraft][:user] || 'minecraft'
 
 directory minecraft_dir do
   action :create
+  mode   '775'
+  group  minecraft_user
 end
 
 directory "#{minecraft_dir}/backups" do
   action :create
+  mode   '775'
+  group  minecraft_user
 end
 
 user 'create minecraft user' do
@@ -35,7 +39,7 @@ execute 'download minecraft server' do
 end
 
 execute 'make executable' do
-  command "chmod 0744 #{minecraft_path}"
+  command "chmod 0754 #{minecraft_path}"
 end
 
 execute 'change minecraft server owner' do
