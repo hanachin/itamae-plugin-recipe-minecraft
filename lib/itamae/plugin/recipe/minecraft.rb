@@ -9,6 +9,8 @@ minecraft_server_url = "https://s3.amazonaws.com/Minecraft.Download/versions/#{m
 filename = File.basename(minecraft_server_url)
 minecraft_path = "#{minecraft_dir}/#{filename}"
 
+minecraft_user = node[:minecraft][:user] || 'minecraft'
+
 directory minecraft_dir do
   action :create
 end
@@ -37,7 +39,7 @@ execute 'make executable' do
 end
 
 execute 'change minecraft server owner' do
-  command "chown #{node[:minecraft][:user]}:#{node[:minecraft][:user]} #{minecraft_path}"
+  command "chown root:#{minecraft_user} #{minecraft_path}"
 end
 
 execute 'create symlink to minecraft jar' do
