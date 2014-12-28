@@ -13,6 +13,10 @@ directory minecraft_dir do
   action :create
 end
 
+directory "#{minecraft_dir}/backups" do
+  action :create
+end
+
 user 'create minecraft user' do
   username    'minecraft'
   home        minecraft_dir
