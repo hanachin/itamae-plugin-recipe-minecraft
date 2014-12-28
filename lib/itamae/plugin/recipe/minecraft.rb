@@ -11,6 +11,12 @@ minecraft_path = "#{minecraft_dir}/#{filename}"
 
 minecraft_user = node[:minecraft][:user] || 'minecraft'
 
+user 'create minecraft user' do
+  username    'minecraft'
+  home        minecraft_dir
+  system_user true
+end
+
 directory minecraft_dir do
   action :create
   mode   '775'
@@ -21,12 +27,6 @@ directory "#{minecraft_dir}/backups" do
   action :create
   mode   '775'
   group  minecraft_user
-end
-
-user 'create minecraft user' do
-  username    'minecraft'
-  home        minecraft_dir
-  system_user true
 end
 
 execute "minecraft user can't login" do
