@@ -1,6 +1,6 @@
 # Itamae::Plugin::Recipe::Minecraft
 
-TODO: Write a gem description
+original startup script: [Tutorials/Server startup script - Minecraft Wiki](http://minecraft.gamepedia.com/Tutorials/Server_startup_script)
 
 ## Installation
 
@@ -20,11 +20,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    include_recipe 'minecraft'
+
+    service 'minecraft' do
+      action :enable
+    end
+
+    service 'minecraft' do
+      action :start
+    end
+
+### attributes
+
+    {
+      "minecraft": {
+        "user": "minecraft",
+        "max_heap": 2048,
+        "min_heap": 1024
+      }
+    }
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/itamae-plugin-recipe-minecraft/fork )
+1. Fork it ( https://github.com/hanachin/itamae-plugin-recipe-minecraft/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
