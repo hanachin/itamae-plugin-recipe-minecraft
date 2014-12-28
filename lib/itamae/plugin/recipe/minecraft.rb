@@ -1,5 +1,11 @@
+require 'json'
+require 'open-uri'
+
+minecraft_versions_url = 'http://s3.amazonaws.com/Minecraft.Download/versions/versions.json'
+minecraft_version = node[:minecraft][:version] || JSON.parse(open(minecraft_versions_url).read)['latest']['release']
+
 minecraft_dir = '/opt/minecraft'
-minecraft_server_url = 'https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar'
+minecraft_server_url = "https://s3.amazonaws.com/Minecraft.Download/versions/#{minecraft_version}/minecraft_server.#{minecraft_version}.jar"
 filename = File.basename(minecraft_server_url)
 minecraft_path = "#{minecraft_dir}/#{filename}"
 
