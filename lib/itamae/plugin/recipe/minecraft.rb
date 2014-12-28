@@ -25,3 +25,8 @@ end
 execute 'change minecraft server owner' do
   command "chown #{node[:minecraft][:user]}:#{node[:minecraft][:user]} #{minecraft_path}"
 end
+
+execute 'create symlink to minecraft jar' do
+  command "ln -sf #{filename} minecraft_server.jar"
+  cwd minecraft_dir
+end
