@@ -56,3 +56,21 @@ file "#{minecraft_dir}/eula.txt" do
   owner minecraft_user
   group minecraft_user
 end
+
+package 'screen'
+
+template '/etc/init.d/minecraft' do
+  mode   '755'
+  owner  'root'
+  group  'root'
+  source 'minecraft.erb'
+  variables({
+    user:     minecraft_user,
+    max_heap: node[:minecraft][:max_heap],
+    min_heap: node[:minecraft][:min_heap]
+  })
+end
+
+execute 'create minecraft service' do
+  command 'insserv minecraft'
+end
