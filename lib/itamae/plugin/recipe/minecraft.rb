@@ -13,6 +13,16 @@ directory minecraft_dir do
   action :create
 end
 
+user 'create minecraft user' do
+  username    'minecraft'
+  home        minecraft_dir
+  system_user true
+end
+
+execute "minecraft user can't login" do
+  command 'chsh -s /usr/sbin/nologin minecraft'
+end
+
 execute 'download minecraft server' do
   command "wget #{minecraft_server_url} -O #{minecraft_path}"
   not_if  "test -f #{minecraft_path}"
